@@ -6,14 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NovaArcade - Unblocked Gaming Hub</title>
   
-  <!-- Use a stable CSS CDN for Tailwind to avoid "not for production" warnings -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
-    /* Manual overrides for Tailwind 3+ features or specific branding colors */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0f172a;
@@ -22,7 +20,6 @@
       overflow-x: hidden;
     }
     
-    /* Compatibility classes for newer Tailwind palettes used in the code */
     .bg-slate-950 { background-color: #020617; }
     .bg-slate-900 { background-color: #0f172a; }
     .bg-slate-800 { background-color: #1e293b; }
@@ -30,21 +27,6 @@
     .text-slate-300 { color: #cbd5e1; }
     .border-slate-700 { border-color: #334155; }
     .bg-indigo-600 { background-color: #4f46e5; }
-    .hover\:bg-indigo-500:hover { background-color: #6366f1; }
-    
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1e293b;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
-    }
     
     .glass {
       background: rgba(30, 41, 59, 0.7);
@@ -53,21 +35,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(99, 102, 241, 0.1);
-      border-top-color: #6366f1;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    /* Animation utilities */
-    .animate-in { animation: fadeIn 0.3s ease-out; }
+    .animate-in { animation: fadeIn 0.4s ease-out forwards; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -89,20 +57,15 @@
 </head>
 <body>
   <div id="root">
-    <!-- Initial loading state while React boots -->
-    <div style="height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0f172a;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-        <div style="background: #4f46e5; padding: 10px; border-radius: 12px;">
-          <i class="fas fa-gamepad" style="color: white; font-size: 24px;"></i>
+    <div class="h-screen w-screen flex flex-col items-center justify-center bg-slate-950">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bg-indigo-600 p-2 rounded-xl">
+          <i class="fas fa-gamepad text-white text-2xl"></i>
         </div>
-        <h1 style="font-size: 28px; font-weight: 900; letter-spacing: -0.05em; color: white; margin: 0; font-family: 'Inter', sans-serif;">
-          NOVA<span style="color: #818cf8;">ARCADE</span>
-        </h1>
+        <h1 class="text-3xl font-black text-white">NOVA<span class="text-indigo-400">ARCADE</span></h1>
       </div>
-      <div class="loading-spinner"></div>
-      <p style="margin-top: 20px; color: #64748b; font-size: 14px; font-weight: 500; letter-spacing: 0.05em; font-family: 'Inter', sans-serif;">INITIALIZING SYSTEM...</p>
+      <div class="w-12 h-12 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin"></div>
     </div>
   </div>
-  <!-- No manual script tag is needed here; the environment automatically injects the transpiled entry point -->
 </body>
 </html>

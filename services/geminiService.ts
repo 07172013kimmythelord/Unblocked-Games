@@ -1,13 +1,14 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
-import { Game, ChatMessage } from "../types";
+import { GoogleGenAI } from "@google/genai";
+import { ChatMessage } from "../types";
 import { GAMES_DATA } from "../constants";
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
 export const getGameRecommendation = async (userMessage: string, chatHistory: ChatMessage[]): Promise<string> => {
   try {
-    const gameListString = GAMES_DATA.map(g => `${g.title} (${g.category}): ${g.description}`).join('\n');
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    const gameListString = GAMES_DATA.length > 0 
+      ? GAMES_DATA.map(g => `${g.title} (${g.category}): ${g.description}`).join('\n')
+      : "Our library is currently updating with new titles!";
     
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
@@ -22,6 +23,7 @@ export const getGameRecommendation = async (userMessage: string, chatHistory: Ch
             The user says: "${userMessage}"
             
             Based on the library above, recommend 1-2 games that fit their request. 
+            If the library is empty, tell them to check back soon as we are adding 100+ titles!
             Be concise, friendly, and enthusiastic. Use bold text for game titles.` 
           }] 
         }
@@ -35,6 +37,6 @@ export const getGameRecommendation = async (userMessage: string, chatHistory: Ch
     return response.text || "I'm having trouble thinking of a game right now. Try checking out our Action section!";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "The gaming crystals are cloudy. Why not try 'Neon Drift' while I reboot?";
+    return "The gaming crystals are cloudy. Why not try one of our featured games while I reboot?";
   }
 };
