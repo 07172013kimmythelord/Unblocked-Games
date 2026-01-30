@@ -68,5 +68,7 @@
       <p class="text-slate-400 text-sm font-medium tracking-widest uppercase animate-pulse">Initializing Interface...</p>
     </div>
   </div>
+  <!-- Explicitly load index.tsx as a module to fix the initialization hang -->
+  <script type="module" src="./index.tsx"></script>
 </body>
 </html>
